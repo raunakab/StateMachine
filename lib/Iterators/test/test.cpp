@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <time.h>
-#include "../../src/Iterators/Iterators.cpp"
+#include "./../src/Iterators.cpp"
 
 
 
@@ -80,10 +80,10 @@ void test_contains(int const x) {
 }
 
 int main() {
-	setup_test_variables();
+	// setup_test_variables();
 
 	std::vector<int> test;
-	// for (int i=0; i<5; i++) test.push_back(i);
+	for (int i=0; i<7; i++) test.push_back(i);
 	// for (int i=0; i<20; ++i) test.push_back(5);
 	// for (int i=0; i<20; ++i) {
 	// 	test.push_back(i);
@@ -91,14 +91,23 @@ int main() {
 	// 	test.push_back((i % 7));
 	// 	test.push_back((i % 3));
 	// }
-	for (int i=0; i<5; ++i) {
-		test.push_back(i);
-		test.push_back(5);
-	}
+	// for (int i=0; i<5; ++i) {
+	// 	test.push_back(i);
+	// 	test.push_back(5);
+	// }
+
+
+
+	typename std::vector<int>::iterator itr_0(test.begin());
+	typename std::vector<int>::iterator itr_1(test.begin());
+	++itr_1;
+	++itr_1;
+	++itr_1;
 
 	print_title_and_testlist("Test: ", test);
-	Iterators<int>::remove(test,5);
-	printf("Size of Test:\t%d\n",test.size());
+	std::remove(itr_0,itr_1,0);
+	// Iterators<int>::remove(test,5);
+	// printf("Size of Test:\t%d\n",test.size()); 
 	print_title_and_testlist("Test: ", test);
 	// bool const residue = Iterators<int>::contains(test,5);
 	// std::cout << residue << std::endl;
