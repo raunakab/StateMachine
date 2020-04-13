@@ -11,8 +11,6 @@
 #define DFLT_MAP -1
 #define SELF_MAP -2
 
-
-
 // class BaseState {
 //     private:
 //         class Jumper {
@@ -217,11 +215,19 @@ bool const BaseState::addJumper(std::string const && action, std::shared_ptr<Bas
     return true;
 }
 bool const BaseState::removeJumper(std::string const & action) {
-    typename std::vector<BaseState::Jumper const *>::iterator itr(this->jumpers->begin());
-    Iterators<BaseState::Jumper const *>::remove(this->jumpers,);
+    typename std::vector<BaseState::Jumper const *>::iterator itr_a(this->jumpers->begin());
+    typename std::vector<BaseState::Jumper const *>::iterator itr_b(itr_a);
+    BaseState::Jumper const * temp(nullptr);
+
+    for (; itr_a!=this->jumpers->end(); ++itr_a) {
+        if ((*itr_a)->getAction() != action) {
+
+        }
+    }
 
     return false;
 }
+
 
 
 #endif
