@@ -220,10 +220,15 @@ bool const BaseState::removeJumper(std::string const & action) {
     BaseState::Jumper const * temp(nullptr);
 
     for (; itr_a!=this->jumpers->end(); ++itr_a) {
-        if ((*itr_a)->getAction()) {
-            
+        if ((*itr_a)->getAction() != action) {
+            *itr_b = *itr_a;
+            ++itr_b;
+        } else {
+            delete *itr_a;
+            *itr_a = nullptr;
         }
     }
+    this->jumpers->erase(itr_b,itr_a);
 
     return false;
 }
