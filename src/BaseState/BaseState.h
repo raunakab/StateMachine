@@ -233,6 +233,10 @@ bool const BaseState::removeJumper(std::string const & action) {
     return false;
 }
 
+std::shared_ptr<BaseState> const BaseState::transition(std::string const & action) const {
+    
+}
+
 
 
 #endif
