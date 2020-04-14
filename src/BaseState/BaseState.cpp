@@ -52,7 +52,7 @@ bool const BaseState::containsBaseState(std::shared_ptr<BaseState> const & baseS
     return false;
 }
 bool const BaseState::addJumper(std::string const && action, std::shared_ptr<BaseState> const baseState) {
-    if (!baseState || this->containsAction(action) || this->containsBaseState(baseState)) return false;
+    if (!baseState || (action == "") || this->containsAction(action) || this->containsBaseState(baseState)) return false;
     this->jumpers->push_back(new BaseState::Jumper(action,baseState));
 
     return true;
