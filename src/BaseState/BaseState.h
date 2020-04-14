@@ -13,25 +13,25 @@
 
 
 
-class Manager {
-    private:
-        std::vector<BaseState * const> * const states = new std::vector<BaseState * const>();
+// class Manager {
+//     private:
+//         std::vector<BaseState * const> * const states = new std::vector<BaseState * const>();
 
-    public:
-        Manager();
-        Manager(Manager const & other);
-        ~Manager();
+//     public:
+//         Manager();
+//         Manager(Manager const & other);
+//         ~Manager();
 
-        void operator=(Manager const & other);
-        bool const operator==(Manager const & other) const;
-        bool const operator!=(Manager const & other) const;
+//         void operator=(Manager const & other);
+//         bool const operator==(Manager const & other) const;
+//         bool const operator!=(Manager const & other) const;
 
-        std::vector<BaseState * const> * const getState() const;
-        // Setter not available
-        bool const addBaseState(BaseState const & baseState);
-        bool const removeBaseState(BaseState const & baseState);
-        bool const containsBaseState(BaseState const & baseState);
-};
+//         std::vector<BaseState * const> * const getState() const;
+//         // Setter not available
+//         bool const addBaseState(BaseState const & baseState);
+//         bool const removeBaseState(BaseState const & baseState);
+//         bool const containsBaseState(BaseState const & baseState);
+// };
 
 class BaseState {
     private:

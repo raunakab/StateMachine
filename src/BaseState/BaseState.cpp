@@ -38,7 +38,7 @@ bool const BaseState::operator!=(BaseState const & other) const { return !this->
 int const BaseState::getID() const { return this->id; }
 
 bool const BaseState::containsAction(std::string const & action) const {
-    typename std::vector<BaseState::Jumper const *>::iterator itr(this->jumpers->begin());
+    std::vector<BaseState::Jumper const *>::iterator itr(this->jumpers->begin());
     for (; itr!=this->jumpers->end(); ++itr) if ((*itr)->getAction() == action) return true;
 
     return false;
@@ -46,7 +46,7 @@ bool const BaseState::containsAction(std::string const & action) const {
 bool const BaseState::containsBaseState(std::shared_ptr<BaseState> const & baseState) const {
     if (!baseState) return false;
 
-    typename std::vector<BaseState::Jumper const *>::iterator itr(this->jumpers->begin());
+    std::vector<BaseState::Jumper const *>::iterator itr(this->jumpers->begin());
     for (; itr!=this->jumpers->end(); ++itr) if ((*itr)->getBaseState() == baseState) return true;
 
     return false;
@@ -58,8 +58,8 @@ bool const BaseState::addJumper(std::string const && action, std::shared_ptr<Bas
     return true;
 }
 bool const BaseState::removeJumper(std::string const & action) {
-    typename std::vector<BaseState::Jumper const *>::iterator itr_a(this->jumpers->begin());
-    typename std::vector<BaseState::Jumper const *>::iterator itr_b(itr_a);
+    std::vector<BaseState::Jumper const *>::iterator itr_a(this->jumpers->begin());
+    std::vector<BaseState::Jumper const *>::iterator itr_b(itr_a);
     BaseState::Jumper const * temp(nullptr);
 
     for (; itr_a!=this->jumpers->end(); ++itr_a) {
@@ -77,13 +77,8 @@ bool const BaseState::removeJumper(std::string const & action) {
 }
 
 std::shared_ptr<BaseState> const BaseState::transition(std::string const & action) const {
-    typename std::vector<BaseState::Jumper const *>::iterator itr(this->jumpers->begin());
+    std::vector<BaseState::Jumper const *>::iterator itr(this->jumpers->begin());
     for (; itr!=this->jumpers->end(); ++itr) if ((*itr)->getAction() == action) return (*itr)->getBaseState();
     
     return nullptr;
-}
-
-
-int main() {
-    return 0;
 }
