@@ -80,6 +80,18 @@ class BaseState {
 
         std::shared_ptr<BaseState> const transition(std::string const &) const;
 };
+class Manager {
+    private:
+        Manager(Manager const &);
+        void operator=(Manager const &);
+
+        std::vector<BaseState *> * const baseStates = new std::vector<BaseState *>;
+
+    public:
+        Manager();
+        ~Manager();
+
+};
 
 
 
