@@ -35,6 +35,8 @@
 
 class BaseState {
     private:
+        BaseState(BaseState const &);
+        void operator=(BaseState const &);
         class Jumper {
             private:
                 std::string const action = "";
@@ -61,9 +63,6 @@ class BaseState {
 
         std::vector<BaseState::Jumper const *> * const get_jumpers() const;
 
-        BaseState(BaseState const &);
-        void operator=(BaseState const &);
-
     public:
         BaseState();
         ~BaseState();
@@ -75,24 +74,12 @@ class BaseState {
 
         bool const containsAction(std::string const &) const;
         bool const containsBaseState(std::shared_ptr<BaseState> const &) const;
+        std::string const getAction(std::shared_ptr<BaseState> const &) const;
         bool const addJumper(std::string const &&, std::shared_ptr<BaseState> const);
         bool const removeJumper(std::string const &);
 
         std::shared_ptr<BaseState> const transition(std::string const &) const;
+        virtual void stateLoop() const = 0;
 };
-class Manager {
-    private:
-        Manager(Manager const &);
-        void operator=(Manager const &);
-
-        std::vector<BaseState *> * const baseStates = new std::vector<BaseState *>;
-
-    public:
-        Manager();
-        ~Manager();
-
-};
-
-
 
 #endif
