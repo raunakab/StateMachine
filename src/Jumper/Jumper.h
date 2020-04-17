@@ -1,6 +1,10 @@
 #ifndef JUMPER_H
 #define JUMPER_H
 
+#include "./../BaseState/BaseState.h"
+
+
+
 class BaseState::Jumper {
     private:
         Jumper();
