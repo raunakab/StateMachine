@@ -2,11 +2,11 @@
 
 
 
-StateMachine::StateMachine(StateMachine const & other) { return; }
-void StateMachine::operator=(StateMachine const & other) { return; }
-
 StateMachine::StateMachine() { return; }
-StateMachine::~StateMachine() { return; }
+StateMachine::~StateMachine() {
+    
+    return;
+}
 
 bool const StateMachine::operator==(StateMachine const & other) const { return false; }
 bool const StateMachine::operator!=(StateMachine const & other) const { return !this->operator==(other); }

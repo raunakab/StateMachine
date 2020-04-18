@@ -25,6 +25,6 @@ int main() {
 	// printf("transition_result_0:\t%p\n",&(*transition_result_0));
 	// printf("transition_result_1:\t%p\n",&(*transition_result_1));
 	// printf("actual address of bs_1:\t%p\n",&(*bs_1));
-	
+
 	return 0;
 }

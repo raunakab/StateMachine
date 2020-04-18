@@ -28,17 +28,16 @@ class StateMachine {
 };
 
 /*
- *  contains_BaseState  (std::shared_ptr<BaseState> const &);   _/  :private
+ *  contains_BaseState  (std::shared_ptr<BaseState> const &);   _/  :public
  *  contains_BaseState  (int const);                            _/  :public
- *  contains_ID         (std::shared_ptr<BaseState> const &);   X
- *  contains_ID         (int const);                            X
  *
- *  get_BaseState       (std::shared_ptr<BaseState> const &);   X
- *  get_BaseState       (int const);                            _/  :private
- *  get_ID              (std::shared_ptr<BaseState> const &);   _/  :private
- *  get_ID              (int const);                            X
+ *  get______BaseState  (std::shared_ptr<BaseState> const &);   X
+ *  get______BaseState  (int const);                            _/  :public
  *
- *  add_BaseState       (std::shared_ptr<BaseState> const &);   _/  :public
+ *  add______BaseState  (std::shared_ptr<BaseState> const &);   _/  :public
+ *
+ *  remove___BaseState  (std::shared_ptr<BaseState> const &);   _/  :public
+ *  remove___BaseState  (int const);                            _/  :public
 */
 
 #endif

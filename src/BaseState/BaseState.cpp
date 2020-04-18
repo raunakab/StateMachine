@@ -23,15 +23,24 @@ BaseState::Jumper const * const BaseState::get_jumper(std::shared_ptr<BaseState>
     return nullptr;
 }
 
-BaseState::BaseState() { return; }
-BaseState::~BaseState() {
-    typename std::vector<BaseState::Jumper const *>::iterator itr(this->jumpers->begin());
+void BaseState::remove_all_jumpers() {
+    std::vector<BaseState::Jumper const *>::iterator itr(this->jumpers->begin());
+    std::vector<BaseState::Jumper const *>::iterator starter(itr);
+    
     for (; itr!=this->jumpers->end(); ++itr) {
         delete (*itr);
         (*itr) = nullptr;
     }
+    this->jumpers->erase(starter,itr);
 
+    return;
+}
+
+BaseState::BaseState() { return; }
+BaseState::~BaseState() {
+    this->remove_all_jumpers();
     delete jumpers;
+
     return;
 }
 
@@ -54,7 +63,6 @@ bool const BaseState::addJumper(std::string const && action, std::shared_ptr<Bas
 bool const BaseState::removeJumper(std::string const & action) {
     std::vector<BaseState::Jumper const *>::iterator itr_a(this->jumpers->begin());
     std::vector<BaseState::Jumper const *>::iterator itr_b(itr_a);
-    BaseState::Jumper const * temp(nullptr);
 
     for (; itr_a!=this->jumpers->end(); ++itr_a) {
         if ((*itr_a)->getAction() != action) {
@@ -65,14 +73,16 @@ bool const BaseState::removeJumper(std::string const & action) {
             *itr_a = nullptr;
         }
     }
-    this->jumpers->erase(itr_b,itr_a);
+    if (itr_a == itr_b) {
+        this->jumpers->erase(itr_b,itr_a);
+        return true;
+    }
 
     return false;
 }
 bool const BaseState::removeJumper(std::shared_ptr<BaseState> const & baseState) {
     std::vector<BaseState::Jumper const *>::iterator itr_a(this->jumpers->begin());
     std::vector<BaseState::Jumper const *>::iterator itr_b(itr_a);
-    BaseState::Jumper const * temp(nullptr);
 
     for (; itr_a!=this->jumpers->end(); ++itr_a) {
         if ((*itr_a)->getBaseState() != baseState) {
@@ -83,7 +93,10 @@ bool const BaseState::removeJumper(std::shared_ptr<BaseState> const & baseState)
             *itr_a = nullptr;
         }
     }
-    this->jumpers->erase(itr_b,itr_a);
+    if (itr_a == itr_b) {
+        this->jumpers->erase(itr_b,itr_a);
+        return true;
+    }
 
     return false;
 }

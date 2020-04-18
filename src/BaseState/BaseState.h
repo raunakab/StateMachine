@@ -7,6 +7,7 @@
 #include <string>
 #include <algorithm>
 #include "./../../lib/linker.cpp"
+// #include "./../StateMachine/StateMachine.h"
 
 #define DFLT_MAP -1
 #define SELF_MAP -2
@@ -14,6 +15,7 @@
 
 
 class BaseState {
+    friend class StateMachine;
     private:
         BaseState(BaseState const &);
         void operator=(BaseState const &);
@@ -27,6 +29,8 @@ class BaseState {
 
         BaseState::Jumper const * const get_jumper(std::string const &) const;
         BaseState::Jumper const * const get_jumper(std::shared_ptr<BaseState> const &) const;
+
+        void remove_all_jumpers();
 
     public:
         BaseState();
