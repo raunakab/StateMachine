@@ -19,59 +19,15 @@ StateMachine::~StateMachine() {
 bool const StateMachine::operator==(StateMachine const & other) const { return this->baseStates == other.get_base_states(); }
 bool const StateMachine::operator!=(StateMachine const & other) const { return !this->operator==(other); }
 
-bool const StateMachine::containsBaseState(std::shared_ptr<BaseState> const & baseState) const {
-    std::vector<std::shared_ptr<BaseState>>::iterator itr(this->baseStates->begin());
-    for (; itr!=this->baseStates->end(); ++itr) if (baseState == (*itr)) return true;
-
-    return false;
-}
-std::shared_ptr<BaseState> const StateMachine::getBaseState(int const index) const {
-    int const x((index >= 0) ? 1 : 0);
-    int const size(this->baseStates->size());
-    
-    switch (x) {
-        case 0: {
-            int const index_mod(((-index-1) % (size+1)));
-            std::vector<std::shared_ptr<BaseState>>::reverse_iterator r_itr(this->baseStates->rbegin());
-            std::advance(r_itr,index_mod);
-            return (*r_itr);
-        }
-        case 1: {
-            int const i_mod(index % (size + 1));
-            std::vector<std::shared_ptr<BaseState>>::iterator itr(this->baseStates->begin());
-            std::advance(itr,i_mod);
-            return (*itr);
-        }
-        default: break;
-    }
-
-    return std::shared_ptr<BaseState>(nullptr);
-}
+bool const StateMachine::containsBaseState(std::shared_ptr<BaseState> const & baseState) const { return Iterators<std::shared_ptr<BaseState>>::contains(*this->baseStates,baseState); }
+std::shared_ptr<BaseState> const StateMachine::getBaseState(int const index) const { return Iterators<std::shared_ptr<BaseState>>::get(*this->baseStates,index); }
 bool const StateMachine::addBaseState(std::shared_ptr<BaseState> const & baseState) {
-    if (!baseState || this->containsBaseState(baseState)) return false;
-    this->baseStates->push_back(baseState);
-
-    return true;
+    if (!baseState) return false;
+    return Iterators<std::shared_ptr<BaseState>>::setInsert(*this->baseStates,baseState,-1);
 }
 bool const StateMachine::removeBaseState(std::shared_ptr<BaseState> const & baseState) {
     if (!baseState) return false;
-
-    std::vector<std::shared_ptr<BaseState>>::iterator itr_a(this->baseStates->begin());
-    std::vector<std::shared_ptr<BaseState>>::iterator itr_b(itr_a);
-
-    for (; itr_a!=this->baseStates->end(); ++itr_a) {
-        if ((*itr_a) != baseState) {
-            if (itr_a != itr_b) (*itr_b) = (*itr_a);
-            ++itr_b;
-        } else (*itr_a) = nullptr;
-    }
-
-    if (itr_a != itr_b) {
-        this->baseStates->erase(itr_b,itr_a);
-        return true;
-    }
-
-    return false;
+    return Iterators<std::shared_ptr<BaseState>>::remove(*this->baseStates,baseState);
 }
 
 std::shared_ptr<BaseState> const StateMachine::getCurrentState() const { return this->currentState; }

@@ -96,10 +96,18 @@ int main() {
 	// 	test.push_back(5);
 	// }
 
+	std::vector<int> my_new_list;
+	for (int i(0); i<5; ++i) my_new_list.push_back(i);
+
+	print_title_and_testlist("My New List:\t",my_new_list);
+	int const my_new_list_test(Iterators<int>::get(my_new_list,-1));
+
+	std::cout << "Result of Iterator<T>::get ->\t" << my_new_list_test << "\n";
 
 
-	typename std::vector<int>::iterator itr_0(test.begin());
-	typename std::vector<int>::iterator itr_1(test.begin());
+
+	std::vector<int>::iterator itr_0(test.begin());
+	std::vector<int>::iterator itr_1(test.begin());
 	++itr_1;
 	++itr_1;
 	++itr_1;
