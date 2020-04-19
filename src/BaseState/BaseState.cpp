@@ -86,7 +86,7 @@ bool const BaseState::removeJumper(std::shared_ptr<BaseState> const & baseState)
 
     for (; itr_a!=this->jumpers->end(); ++itr_a) {
         if ((*itr_a)->getBaseState() != baseState) {
-            *itr_b = *itr_a;
+            if (itr_a != itr_b) *itr_b = *itr_a;
             ++itr_b;
         } else {
             delete *itr_a;
