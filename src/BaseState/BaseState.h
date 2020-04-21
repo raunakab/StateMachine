@@ -50,7 +50,6 @@ class BaseState {
         std::string const getJumperAction(std::shared_ptr<BaseState> const &) const;
         std::shared_ptr<BaseState> const getJumperBaseState(std::string const &) const;
 
-        std::shared_ptr<BaseState> const transition(std::string const &) const;
         virtual void stateLoop() const = 0;
 };
 

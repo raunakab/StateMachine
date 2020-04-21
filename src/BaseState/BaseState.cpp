@@ -7,7 +7,7 @@ unsigned int BaseState::counter = 0;
 std::vector<BaseState::Jumper const *> * const BaseState::get_jumpers() const { return this->jumpers; }
 
 BaseState::Jumper const * const BaseState::get_jumper(std::string const & action) const {
-    if (action == "") return nullptr;
+    if (action == std::string("")) return nullptr;
 
     std::vector<BaseState::Jumper const *>::iterator itr(this->jumpers->begin());
     for (; itr!=this->jumpers->end(); ++itr) if ((*itr)->getAction() == action) return (*itr);
@@ -55,7 +55,7 @@ bool const BaseState::containsJumper(std::shared_ptr<BaseState> const & baseStat
     return this->get_jumper(baseState) != nullptr;
 }
 bool const BaseState::addJumper(std::string const && action, std::shared_ptr<BaseState> const & baseState) {
-    if (!baseState || (action == "") || this->containsJumper(action) || this->containsJumper(baseState)) return false;
+    if (!baseState || (action == std::string("")) || this->containsJumper(action) || this->containsJumper(baseState)) return false;
     this->jumpers->push_back(new BaseState::Jumper(action,baseState));
 
     return true;
@@ -102,16 +102,14 @@ bool const BaseState::removeJumper(std::shared_ptr<BaseState> const & baseState)
 }
 
 std::string const BaseState::getJumperAction(std::shared_ptr<BaseState> const & baseState) const {
-    if (!baseState) return "";
+    if (!baseState) return std::string("");
 
     BaseState::Jumper const * const temp(this->get_jumper(baseState));
-    return temp ? temp->getAction() : "";
+    return temp ? temp->getAction() : std::string("");
 }
 std::shared_ptr<BaseState> const BaseState::getJumperBaseState(std::string const & action) const {
-    if (action == "") return nullptr;
+    if (action == std::string("")) return std::shared_ptr<BaseState>(nullptr);
 
     BaseState::Jumper const * const temp(this->get_jumper(action));
-    return temp ? temp->getBaseState() : nullptr;
+    return temp ? temp->getBaseState() : std::shared_ptr<BaseState>(nullptr);
 }
-
-std::shared_ptr<BaseState> const BaseState::transition(std::string const & action) const { return std::shared_ptr<BaseState>(this->getJumperBaseState(action)); }

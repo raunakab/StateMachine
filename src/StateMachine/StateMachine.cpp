@@ -38,4 +38,6 @@ bool const StateMachine::start(std::shared_ptr<BaseState> const & baseState) {
 
     return true;
 }
-bool const StateMachine::transition(std::string const & action) const { return false; }
+bool const StateMachine::transition(std::string const & action) const {
+    // this->currentState->transition(action);
+}
